@@ -26,7 +26,7 @@ if __name__ == '__main__':
     response = openai.Completion.create(
         model="text-davinci-003",
         prompt=generate_prompt(news_headline),
-        temperature=0.7,
+        temperature=0.6,
         n=1,
         max_tokens=256,
         stop=None,
@@ -38,6 +38,6 @@ if __name__ == '__main__':
 
     issue_title = f"실시간 뉴스 요약({today_date})"
     repo = get_github_repo(access_token, repository_name)
-    upload_github_issue(repo, issue_title, news_headline)
+    upload_github_issue(repo, issue_title, response.choices[0].text)
     print("Upload Github Issue Success!")
 
